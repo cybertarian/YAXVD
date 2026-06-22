@@ -1,0 +1,45 @@
+/* content/content.css */
+.xdl-btn-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.xdl-download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgb(83, 100, 113);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.xdl-download-btn:hover {
+  background-color: rgba(0, 186, 124, 0.1);
+  color: rgb(0, 186, 124);
+}
+
+.xdl-download-btn.loading {
+  color: rgb(29, 155, 240);
+  animation: xdl-spin 0.9s linear infinite;
+}
+
+.xdl-download-btn.success {
+  color: rgb(0, 186, 124);
+}
+
+.xdl-download-btn.error {
+  color: rgb(244, 33, 46);
+}
+
+@keyframes xdl-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

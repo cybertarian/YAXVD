@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "X/Twitter Video Downloader",
+  "version": "6.0.0",
+  "description": "Adds a one-click download button next to videos on X/Twitter. No local server required. Configurable: Hybrid, Intercept-only, or Syndication-only mode.",
+  "permissions": ["storage", "notifications", "downloads"],
+  "host_permissions": [
+    "https://cdn.syndication.twimg.com/*"
+  ],
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": [
+        "page-hook/01-core.js",
+        "page-hook/02-extractor.js",
+        "page-hook/03-hook-control.js",
+        "page-hook/04-bootstrap.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": [
+        "content/01-namespace.js",
+        "content/02-mode-sync.js",
+        "content/03-video-cache.js",
+        "content/04-tweet-detector.js",
+        "content/05-button-ui.js",
+        "content/06-download-flow.js",
+        "content/07-bootstrap.js"
+      ],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
